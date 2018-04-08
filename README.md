@@ -43,6 +43,6 @@ Le animazioni effettuate sono le seguenti:
 Il risultato finale mostra il Falcon Heavy, appoggiato sulla base irregolare, con il fuoco e il fumo che inizia ad uscire dai motori. 
 Dopo 6 secondi, avviene la partenza del razzo. Man mano che il razzo si alza, lo sfondo cambia colore da bianco ad azzurro a blu. Infine il razzo giunge nello spazio.
 
-![Razzo sulla base](/resources/base.jpeg) <!-- .element width="25%" -->
-![Razzo in cielo](/resources/sky.jpeg) <!-- .element width="25%" -->
-![Razzo nello spazio](/resources/space.jpeg) <!-- .element width="25%" -->
+![Razzo sulla base](/resources/base.png) <!-- .element width="25%" -->
+![Razzo in cielo](/resources/sky.png) <!-- .element width="25%" -->
+![Razzo nello spazio](/resources/space.png) <!-- .element width="25%" -->
