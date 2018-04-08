@@ -1,8 +1,8 @@
-#Report 
-##Descrizione generale
+# Report 
+## Descrizione generale
 Per il progetto ho deciso di realizzare in 3D il modello del razzo *Falcon Heavy* di SpaceX posizionato su un terreno irregolare generato attraverso l'utilizzo di una heightmap. L'animazione scelta è la fuoriuscita del fumo dai motori e la partenza del razzo verso lo spazio. 
 
-![Scene graph](/resources/scene_graph.pdf)
+![Scene graph](/resources/scene_graph.jpeg)
 
 Come si può vedere dal grafo della scena, gli oggetti principali sono due: il terreno e il *Falcon Heavy* formato a sua volta da tre *Falcon 9*. I razzi laterali sono figli del razzo centrale, in questo modo, agendo su quest'ultimo, si agisce sull'intero razzo.  
 
@@ -19,8 +19,7 @@ Le librerie utilizzate sono le seguenti:
 - **OrbitControls.js**
 - **tween.min.js** per l'animazione del razzo.
 
-##
-Sviluppo del progetto
+## Sviluppo del progetto
 Per la realizzazione di questo progetto, per prima cosa sono andata sul sito di SpaceX [SpaceX](http://www.spacex.com/falcon-heavy) per osservare le caratteristiche estetiche del Falcon Heavy. Per rientrare nei tempi ho deciso di semplificare il più possibile il razzo mantenendo solo le paculiarità generali. 
 
 Il progetto è stato sviluppato attraverso i seguenti passi: 
@@ -40,10 +39,10 @@ Le animazioni effettuate sono le seguenti:
 - interpolazione del colore di sfondo da bianco ad azzurro a blu
 
 
-##Risultato
+## Risultato
 Il risultato finale mostra il Falcon Heavy, appoggiato sulla base irregolare, con il fuoco e il fumo che inizia ad uscire dai motori. 
 Dopo 6 secondi, avviene la partenza del razzo. Man mano che il razzo si alza, lo sfondo cambia colore da bianco ad azzurro a blu. Infine il razzo giunge nello spazio.
 
-![Razzo sulla base](/resources/base.jpeg)
-![Razzo in cielo](/resources/sky.jpeg)
-![Razzo sulla base](/resources/space.jpeg)
+<img src="/resources/base.jpeg" alt="Razzo sulla base" style="width: 200px;"/>
+<img src="/resources/sky.jpeg" alt="Razzo in cielo" style="width: 200px;"/>
+<img src="/resources/space.jpeg" alt="Razzo nello spazio" style="width: 200px;"/>
