@@ -16,7 +16,7 @@
 ## 29/03/18
 - Inserimento dell'ombra: risultato non soddisfacente. 
 
-## 30/07/18
+## 30/03/18
 - Correzione delle luci e delle ombre attraverso la modifica delle dimensioni del frustum. 
 
 ## 3/04/18
