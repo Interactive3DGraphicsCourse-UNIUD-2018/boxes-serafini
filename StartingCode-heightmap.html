@@ -1,0 +1,165 @@
+<html>
+	<head>
+		<title>Starting Code for 1st Project 2017</title>
+		<style>
+		
+		body {
+			font-family: Monospace;
+			background-color: #f0f0f0;
+			margin: 0px;
+			overflow: hidden;
+		}
+		
+		canvas { 
+			width: 100%; 
+			height: 100%;
+		}
+	
+	</style>
+		<script src="lib/three.min.js"></script>
+		<script src="lib/stats.min.js"></script>
+		<script src="lib/Coordinates.js"></script>
+		<script src="lib/OrbitControls.js"></script>
+	</head>
+	<body>
+		
+		<script>
+		
+		var scene, camera, renderer, controls, stats;
+		
+		//return array with height data from img, taken from: http://danni-three.blogspot.it/2013/09/threejs-heightmaps.html
+		function getHeightData(img,scale) {
+  
+		 if (scale == undefined) scale=1;
+  
+		    var canvas = document.createElement( 'canvas' );
+		    canvas.width = img.width;
+		    canvas.height = img.height;
+		    var context = canvas.getContext( '2d' );
+ 
+		    var size = img.width * img.height;
+		    var data = new Float32Array( size );
+ 
+		    context.drawImage(img,0,0);
+ 
+		    for ( var i = 0; i < size; i ++ ) {
+		        data[i] = 0
+		    }
+ 
+		    var imgd = context.getImageData(0, 0, img.width, img.height);
+		    var pix = imgd.data;
+ 
+		    var j=0;
+		    for (var i = 0; i<pix.length; i +=4) {
+		        var all = pix[i]+pix[i+1]+pix[i+2];  // all is in range 0 - 255*3
+		        data[j++] = scale*all/3;   
+		    }
+     
+		    return data;
+		}
+		
+		function Start() {
+			scene = new THREE.Scene();
+			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			renderer = new THREE.WebGLRenderer( {antialias: true} );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setClearColor( 0xf0f0f0 );
+			document.body.appendChild( renderer.domElement );
+			
+			camera.position.set(53,74,76);
+			camera.lookAt( new THREE.Vector3(0,0,0));
+			
+			stats = new Stats();
+			stats.domElement.style.position = 'absolute';
+			stats.domElement.style.top = '0px';
+			document.body.appendChild( stats.domElement );
+
+			//light
+			light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+			light.castShadow =true;
+			light.position.set(-250,500,0);
+			light.lookAt(0,0,0);
+			scene.add(light);
+			
+			// uncomment if you need to draw coordinate axes when building the scene
+			Coordinates.drawAllAxes();
+			
+			controls = new THREE.OrbitControls( camera );
+			controls.addEventListener( 'change', Render );
+
+			var geometry = new THREE.BoxGeometry(1,1,1);
+			var texture = new THREE.TextureLoader().load( 'textures/badrock.png' );
+			var material = new THREE.MeshPhongMaterial( { map: texture } );
+			var plane = Array(3600); //l'immagine è 60x60
+			var terrain = new THREE.Object3D();
+			var counter = 0;
+			for(var i = 0; i < 60; i++) {
+				for(var j = 0; j < 60; j++) {
+					var c = new THREE.Mesh(geometry, material);
+					c.castShadow = true;
+					c.receiveShadow = true;
+					c.position.set(-30+j, 0, -30+i);//data[i]/2
+					plane[counter] = c;
+					counter++;
+					terrain.add(c);
+				}
+			}
+			scene.add(terrain);
+			
+			// terrain
+			var img = new Image();
+			img.onload = function () {
+				//get height data from img
+				var data = getHeightData(img,0.1);
+    			//console.log(Math.max(...data));
+    			for ( var i = 0; i<plane.length; i++ ) {
+         			plane[i].position.y = data[i]/2;
+         			plane[i].scale.y = data[i];
+         			//VOGLIO CAMBIARE COLORE
+         			//var normalVal = THREE.Math.mapLinear(data[i], 0, 25.5, 0, 1);
+         			//var color = new THREE.Color(normalVal, normalVal, normalVal);
+         			//console.log(x);
+         			//plane[i].material.color.set = 0xffff00;
+    			}
+  			};
+			// load img source
+			img.src = "textures/heightmap2.png";
+		}
+
+		/*function createBase(dim, data, material) {
+			var geometry = new THREE.BoxGeometry(1,1,1);
+			var material = new THREE.MeshLambertMaterial( { color: material } );
+			var plane = Array(3600); //l'immagine è 60x60
+			var counter = 0;
+			for(var i = 0; i < 60; i++) {
+				for(var j = 0; j < 60; j++) {
+					var c = new THREE.Mesh(geometry, material);
+					c.castShadow = true;
+					c.receiveShadow = true;
+					c.position.set(-30+j, data[i]/2, -30+i);//data[i]/2
+					plane[counter] = c;
+					counter++;
+					scene.add(c);
+				}
+			}
+		}*/
+		
+		function Update() {
+			requestAnimationFrame( Update );
+			controls.update();  
+			stats.update();
+			Render();
+		}
+		
+		function Render() {
+			
+			renderer.render(scene, camera);
+		}
+		
+		Start();
+		Update();
+			
+		</script>
+	</body>
+</html>
