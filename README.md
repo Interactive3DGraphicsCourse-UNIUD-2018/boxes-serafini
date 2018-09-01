@@ -1,5 +1,6 @@
 # Report 
 ## Descrizione generale
+[Link al progetto](https://cocuma22.github.io/Falcon-Heavy-with-boxes/).
 Per il progetto ho deciso di realizzare in 3D il modello del razzo *Falcon Heavy* di SpaceX posizionato su un terreno irregolare generato attraverso l'utilizzo di una heightmap. L'animazione scelta è la fuoriuscita del fumo dai motori e la partenza del razzo verso lo spazio. 
 
 ![Scene graph](/resources/scene_graph.jpeg)
